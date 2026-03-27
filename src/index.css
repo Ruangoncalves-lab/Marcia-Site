@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Poppins:wght@400;500;600;700&family=Roboto+Condensed:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body bg-surface-page text-text-secondary antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-text-primary capitalize tracking-normal;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-primary text-text-on-accent font-display text-cta rounded-button px-8 py-4 transition-all duration-300 hover:bg-accent-hover hover:-translate-y-1 shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-accent-secondary text-text-on-accent font-display text-cta rounded-button px-8 py-4 transition-all duration-300 hover:brightness-110 hover:-translate-y-1 shadow-md;
+  }
+
+  .card-premium {
+    @apply bg-surface-card rounded-card shadow-card p-8 border border-border-default transition-all duration-300 hover:shadow-float hover:-translate-y-2;
+  }
+
+  /* Global light texture */
+  .bg-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+}
