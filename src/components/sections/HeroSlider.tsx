@@ -150,14 +150,14 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
 
             {/* Right Image */}
             <motion.div 
-              className="slide-image-wrap flex justify-center lg:justify-end items-center relative"
+              className="slide-image-wrap flex justify-center lg:justify-end items-center relative overflow-hidden"
               variants={imageVariants}
               initial="hidden"
               animate="visible"
             >
-              <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] aspect-[4/5] flex items-center justify-center mx-auto">
                  {/* Floating background circle */}
-                 <div className="absolute inset-0 bg-accent-subtle/30 rounded-full blur-3xl scale-125 z-0"></div>
+                 <div className="absolute inset-0 bg-accent-subtle/30 rounded-full blur-3xl scale-110 z-0"></div>
                  <img 
                    src={slides[currentIndex].image} 
                    alt={slides[currentIndex].title}
