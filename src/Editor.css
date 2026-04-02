@@ -1,0 +1,122 @@
+/* 
+  Estilo Elementor Customizado para o @measured/puck
+  - Cores escuras para a UI do Editor
+  - Caixas de componentes estilo "Widgets"
+*/
+
+/* Variáveis Raiz do Puck - Tematizando para Dark */
+.puck {
+  --puck-color-bg: #25282B !important;
+  --puck-color-grey-12: #1E2022 !important;
+  --puck-color-grey-11: #2B2E33 !important;
+  --puck-color-grey-10: #383D43 !important;
+  --puck-color-grey-09: #5C636A !important;
+  --puck-color-grey-08: #8C98A4 !important;
+  --puck-color-grey-07: #A2AEBA !important;
+  --puck-color-grey-06: #B8C4CF !important;
+  --puck-color-grey-01: #F8F9FA !important; /* Texto principal do editor */
+  
+  --puck-color-brand: #ff7c08 !important; /* Laranja da Marca (Ecofoodpack) */
+}
+
+/* Global Reset for Editor Text */
+.puck-editor, .puck {
+  color: #F8F9FA !important;
+}
+
+/* Header Superior */
+div[class^="Header_"] {
+  background-color: #1E2022 !important;
+  border-bottom: 1px solid #141517 !important;
+  color: #fff !important;
+}
+
+/* Sidebars (Painéis Laterais) */
+aside[class^="Sidebar_"] {
+  background-color: #25282B !important;
+  border-color: #141517 !important;
+}
+
+/* Títulos das Categorias (Cabeçalhos do Accordion) */
+div[class^="Drawer_"] > div[role="button"],
+div[class^="Category_title_"] {
+  background-color: #1E2022 !important;
+  color: #fff !important;
+  border-top: 1px solid #141517 !important;
+  border-bottom: 1px solid #141517 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.5px !important;
+  padding: 12px 16px !important;
+  margin: 0 !important;
+}
+
+/* Lista de "Widgets" (Componentes) */
+div[class^="Category_items_"],
+div[class^="Components_items_"] {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  padding: 16px !important;
+  background-color: #25282B !important;
+}
+
+/* Aparência "Widget" do Elementor */
+div[class^="ComponentItem_"] {
+  background-color: #2B2E33 !important;
+  border: 1px solid #1E2022 !important;
+  border-radius: 4px !important;
+  color: #D5D8DC !important;
+  padding: 16px 8px !important;
+  text-align: center !important;
+  transition: all 0.2s ease !important;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+/* O texto do widget */
+div[class^="ComponentItem_"] span {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+/* Hover e arrasto do Widget */
+div[class^="ComponentItem_"]:hover {
+  background-color: #34383E !important;
+  border-color: #ff7c08 !important;
+  color: #fff !important;
+  cursor: grab !important;
+}
+
+/* Painel da Direita (Propriedades/Configurações) */
+div[class^="Heading_"] {
+  color: #fff !important;
+}
+
+div[class^="FieldLabel_"] {
+  color: #8C98A4 !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+
+/* Inputs, Textareas e Selects do Painel da Direita */
+input[class^="Input_"], 
+textarea[class^="Textarea_"], 
+select[class^="Select_"] {
+  background-color: #1E2022 !important;
+  border: 1px solid #383D43 !important;
+  color: #FFF !important;
+  border-radius: 4px !important;
+}
+
+input[class^="Input_"]:focus, 
+textarea[class^="Textarea_"]:focus, 
+select[class^="Select_"]:focus {
+  border-color: #ff7c08 !important;
+  outline: none !important;
+}
+
+/* Fundo do "Canvas" (A área atrás do Iframe) */
+div[class^="Canvas_"] {
+  background-color: #141517 !important;
+}

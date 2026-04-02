@@ -74,6 +74,28 @@ const imageField = {
 };
 
 export const config: Config<any> = {
+    categories: {
+        header: {
+            title: "Cabeçalhos & Banners",
+            components: ["Hero", "HeroSlider", "PromoBanners"]
+        },
+        commerce: {
+            title: "Catálogo",
+            components: ["Categories", "Products"]
+        },
+        value: {
+            title: "Proposta de Valor",
+            components: ["Process", "Benefits", "Sustainability", "VisualProof"]
+        },
+        conversion: {
+            title: "Conversão & Prova Social",
+            components: ["Testimonials", "Cta", "Newsletter"]
+        },
+        institutional: {
+            title: "Institucional",
+            components: ["About", "Contact"]
+        }
+    },
     components: {
         VisualProof: {
             fields: {
