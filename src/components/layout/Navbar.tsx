@@ -46,7 +46,7 @@ export const Navbar = () => {
         ['0 0 0 rgba(0,0,0,0)', '0 4px 20px rgba(0,0,0,0.08)']
     );
 
-    const topBannerHeight = 40;
+    const topBannerHeight = 45;
     
     // Animate navbar up when scrolling past the top banner
     const navTop = useTransform(
@@ -92,15 +92,9 @@ export const Navbar = () => {
                         <NavigationMenu.Root className="relative flex w-full justify-center z-10">
                             <NavigationMenu.List className="flex items-center gap-2 m-0 list-none">
                                 <NavigationMenu.Item>
-                                    <NavigationMenu.Trigger className="nav-trigger group">
-                                        Home <ChevronDown className="nav-chevron transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
-                                    </NavigationMenu.Trigger>
-                                    <NavigationMenu.Content className="nav-content absolute top-0 left-0 w-full sm:w-auto">
-                                        <ul className="m-0 grid list-none gap-x-2 gap-y-1 p-4 sm:w-[400px] sm:grid-cols-2">
-                                            <ListItem href="/" title="Loja Padrão">Visão principal do site ecológico.</ListItem>
-                                            <ListItem href="/quem-somos" title="A Empresa">Nossa história e missão verde.</ListItem>
-                                        </ul>
-                                    </NavigationMenu.Content>
+                                    <NavigationMenu.Link className="nav-link block select-none rounded-md px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none hover:bg-gray-100 hover:text-accent-primary" href="#">
+                                        Início
+                                    </NavigationMenu.Link>
                                 </NavigationMenu.Item>
 
                                 <NavigationMenu.Item>

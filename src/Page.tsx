@@ -8,7 +8,12 @@ import { defaultHomeData, defaultAboutData } from "./defaultPuckData";
 export const Page = () => {
     const location = useLocation();
     const path = location.pathname;
-    const storageKey = `puck-data-${path}`;
+    const searchParams = new URLSearchParams(location.search);
+    const forceReset = searchParams.get('reset') === 'true';
+
+    if (forceReset) {
+        localStorage.removeItem(storageKey);
+    }
 
     const data = localStorage.getItem(storageKey)
         ? JSON.parse(localStorage.getItem(storageKey)!)
