@@ -1,17 +1,37 @@
 export const defaultHomeData = {
     content: [
         {
-            type: "Hero",
-            props: {
-                id: "hero-1",
-                badgeText: "Representante Autorizado EcoFoodPack",
-                titleStart: "Embalagens",
-                titleHighlight: "Sustentáveis",
-                titleEnd: "para seu Negócio",
-                description: "Soluções ecológicas e de alta qualidade para restaurantes, fast food e delivery. Representamos a EcoFoodPack, referência em embalagens que respeitam o meio ambiente.",
-                primaryButtonText: "Ver Produtos",
-                secondaryButtonText: "Fale Conosco",
-                whatsappLink: "https://wa.me/5521982336850"
+            "type": "HeroSlider",
+            "props": {
+                "slides": [
+                    {
+                        "id": "1",
+                        "badge": "Ecofoodpack — 100% Sustentável",
+                        "title": "Embalagens que Valorizam sua Marca.",
+                        "subtitle": "Destaque-se com o Kraft Certificado e garanta a melhor experiência para seu cliente.",
+                        "buttonText": "Explorar Catálogo",
+                        "buttonLink": "#produtos",
+                        "image": "/ecofood_packaging_hero_product_1775152849305.png" 
+                    },
+                    {
+                        "id": "2",
+                        "badge": "Compromisso Verde",
+                        "title": "Inovação em Cada Detalhe Ecológico.",
+                        "subtitle": "Consumidores premium preferem marcas que reduzem o uso de plásticos descartáveis.",
+                        "buttonText": "Nossa Missão",
+                        "buttonLink": "#sobre",
+                        "image": "/ecofood_sustainability_hero_detail_1775152908993.png"
+                    },
+                    {
+                        "id": "3",
+                        "badge": "Linha Completa",
+                        "title": "Soluções Versáteis para seu Delivery.",
+                        "subtitle": "De potes a sacolas personalizadas. Tudo o que seu negócio precisa em um só lugar.",
+                        "buttonText": "Solicitar Orçamento",
+                        "buttonLink": "#contato",
+                        "image": "/ecofood_catalog_hero_arrangement_1775152928875.png"
+                    }
+                ]
             }
         },
         { type: "PromoBanners", props: { id: "promo-1" } },

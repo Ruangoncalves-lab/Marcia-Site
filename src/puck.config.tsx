@@ -1,6 +1,7 @@
 // @ts-nocheck
 import type { Config } from "@measured/puck";
 import { Hero } from "./components/sections/Hero";
+import { HeroSlider } from "./components/sections/HeroSlider";
 import { PromoBanners } from "./components/sections/PromoBanners";
 import { Categories } from "./components/sections/Categories";
 import { Products } from "./components/sections/Products";
@@ -93,6 +94,60 @@ export const config: Config<any> = {
                 afterBadge: "$$$"
             },
             render: (props) => <VisualProof {...props} />
+        },
+        HeroSlider: {
+            fields: {
+                slides: {
+                    type: "array",
+                    arrayFields: {
+                        badge: { type: "text" },
+                        title: { type: "text" },
+                        subtitle: { type: "textarea" },
+                        buttonText: { type: "text" },
+                        buttonLink: { type: "text" },
+                        image: imageField,
+                    },
+                    defaultItemProps: {
+                        badge: "Ecofoodpack — Sustentável",
+                        title: "Embalagens que Valorizam sua Marca.",
+                        subtitle: "Destaque-se com o Kraft Certificado.",
+                        buttonText: "Explorar Catálogo",
+                        buttonLink: "#produtos"
+                    }
+                }
+            },
+            defaultProps: {
+                slides: [
+                    {
+                        id: "1",
+                        badge: "Ecofoodpack — 100% Sustentável",
+                        title: "Embalagens que Valorizam sua Marca.",
+                        subtitle: "Destaque-se com o Kraft Certificado e garanta a melhor experiência para seu cliente.",
+                        buttonText: "Explorar Catálogo",
+                        buttonLink: "#produtos",
+                        image: "/ecofood_packaging_hero_product_1775152849305.png" 
+                    },
+                    {
+                        id: "2",
+                        badge: "Compromisso Verde",
+                        title: "Inovação em Cada Detalhe Ecológico.",
+                        subtitle: "Consumidores premium preferem marcas que reduzem o uso de plásticos descartáveis.",
+                        buttonText: "Nossa Missão",
+                        buttonLink: "#sobre",
+                        image: "/ecofood_sustainability_hero_detail_1775152908993.png"
+                    },
+                    {
+                        id: "3",
+                        badge: "Linha Completa",
+                        title: "Soluções Versáteis para seu Delivery.",
+                        subtitle: "De potes a sacolas personalizadas. Tudo o que seu negócio precisa em um só lugar.",
+                        buttonText: "Solicitar Orçamento",
+                        buttonLink: "#contato",
+                        image: "/ecofood_catalog_hero_arrangement_1775152928875.png"
+                    }
+                ]
+            },
+            render: (props: any) => <HeroSlider {...props} />,
         },
         Hero: {
             fields: {
