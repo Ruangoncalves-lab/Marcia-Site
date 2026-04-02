@@ -58,7 +58,7 @@ export const Navbar = () => {
     return (
         <>
             {/* Top Banner */}
-            <div className="fixed top-0 left-0 right-0 h-[40px] bg-[#ff7c08] text-white z-50 flex items-center px-4 lg:px-12 text-sm font-body justify-between">
+            <div className="fixed top-0 left-0 right-0 h-[40px] bg-[#ff7c08] text-white z-50 flex items-center px-4 lg:px-12 text-sm font-body justify-between border-b border-orange-600/30">
                 <div>
                    Bem-vindo à MCosta Representações!
                 </div>
@@ -72,7 +72,7 @@ export const Navbar = () => {
                     <div className="flex items-center gap-3">
                         <a href="#" className="hover:text-gray-200 transition"><Facebook size={14} fill="currentColor" strokeWidth={0} /></a>
                         <a href="#" className="hover:text-gray-200 transition"><Twitter size={14} fill="currentColor" strokeWidth={0} /></a>
-                        <a href="#" className="hover:text-gray-200 transition"><Instagram size={14} /></a>
+                        <a href="https://www.instagram.com/mcostaecofoodpack/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition"><Instagram size={14} /></a>
                         <a href="#" className="hover:text-gray-200 transition"><Youtube size={14} /></a>
                     </div>
                 </div>
