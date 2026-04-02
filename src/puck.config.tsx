@@ -13,6 +13,7 @@ import { Cta } from "./components/sections/Cta";
 import { VisualProof } from "./components/sections/VisualProof";
 import { About } from "./components/sections/About";
 import { Contact } from "./components/sections/Contact";
+import { Newsletter } from "./components/sections/Newsletter";
 
 const imageField = {
     type: "custom" as const,
@@ -561,6 +562,23 @@ export const config: Config<any> = {
                 whatsapp_link: "https://wa.me/5521960142258"
             },
             render: (props) => <Contact {...props} />
+        },
+        Newsletter: {
+            fields: {
+                title: { type: "text" },
+                subtitle: { type: "textarea" },
+                placeholder: { type: "text" },
+                buttonText: { type: "text" },
+                disclaimer: { type: "text" }
+            },
+            defaultProps: {
+                title: "Fique por Dentro das Novidades",
+                subtitle: "Receba em primeira mão lançamentos, promoções exclusivas e dicas de sustentabilidade para o seu negócio.",
+                placeholder: "Seu melhor e-mail",
+                buttonText: "Inscrever-se",
+                disclaimer: "Respeitamos sua privacidade. Cancele quando quiser."
+            },
+            render: (props) => <Newsletter {...props} />
         }
     },
 };

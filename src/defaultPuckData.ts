@@ -36,6 +36,35 @@ export const defaultHomeData = {
             }
         },
         {
+            "type": "PromoBanners",
+            "props": {
+                "id": "promo-1",
+                "banners": [
+                    {
+                        "id": "1",
+                        "badge": "Biodegradável",
+                        "titleStart": "Sua marca \n com o",
+                        "titleHighlight": "Kraft Certificado",
+                        "linkText": "Explorar Linha",
+                        "linkUrl": "#produtos",
+                        "bgColor": "surface-section-alt",
+                        "imageType": "kraft"
+                    },
+                    {
+                        "id": "2",
+                        "badge": "Embalagens Seladas",
+                        "titleStart": "Segurança \n e",
+                        "titleHighlight": "Higiene Total",
+                        "linkText": "Descobrir",
+                        "linkUrl": "#produtos",
+                        "bgColor": "[#F0F4F2]",
+                        "glowColor": "accent-primary",
+                        "imageType": "selada"
+                    }
+                ]
+            }
+        },
+        {
             "type": "About",
             "props": {
                 "id": "about-1",
@@ -79,11 +108,53 @@ export const defaultHomeData = {
             }
         },
         {
+            "type": "VisualProof",
+            "props": {
+                "id": "visual-1",
+                "title": "A Diferença é Visual",
+                "subtitle": "O cuidado com a estética impacta diretamente no faturamento.",
+                "beforeLabel": "Comum",
+                "beforeText": "Apenas um recipiente.",
+                "afterLabel": "Premium",
+                "afterText": "Uma extensão da sua marca que os clientes fotografam e desejam.",
+                "afterBadge": "$$$"
+            }
+        },
+        {
+            "type": "Benefits",
+            "props": {
+                "id": "benefits-1",
+                "titleStart": "Uma Parceria",
+                "titleHighlight": "De Confiança",
+                "subtitle": "Nosso padrão de qualidade garante muito mais do que estética.",
+                "experienceValue": "+10",
+                "experienceText": "Anos de Mercado",
+                "projectsValue": "+5k",
+                "projectsText": "Clientes Ativos",
+                "benefits": [
+                    { "id": "1", "title": "Opções de Entrega Variáveis", "description": "Logística pensada para não deixar sua operação parar de funcionar. Despachamos pelo modo mais seguro e rápido.", "metrics": "Praticidade total" },
+                    { "id": "2", "title": "Pagamento Flexível", "description": "Além de desconto no formato PIX, é possível parcelar seu pedido em até 6x sem juros.", "metrics": "6x Sem Juros" },
+                    { "id": "3", "title": "Atendimento Próximo", "description": "Vendedores consultivos. Nossa equipe atende direto via WhatsApp, te auxiliando a escolher a embalagem perfeita.", "metrics": "Suporte Rápido" }
+                ]
+            }
+        },
+        {
             "type": "Testimonials",
             "props": {
                 "id": "test-1",
                 "title": "O que dizem nossos parceiros",
                 "subtitle": "Satisfação garantida em cada entrega."
+            }
+        },
+        {
+            "type": "Newsletter",
+            "props": {
+                "id": "newsletter-1",
+                "title": "Fique por Dentro das Novidades",
+                "subtitle": "Receba em primeira mão lançamentos, promoções exclusivas e dicas de sustentabilidade para o seu negócio.",
+                "placeholder": "Seu melhor e-mail",
+                "buttonText": "Inscrever-se",
+                "disclaimer": "Respeitamos sua privacidade. Cancele quando quiser."
             }
         },
         {
