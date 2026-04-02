@@ -132,7 +132,7 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
               <div className="mb-6 inline-flex items-center gap-2">
                 <span className="slide-badge">{slides[currentIndex].badge}</span>
               </div>
-              <h1 className="font-serif-headline text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[1.1] mb-6">
+              <h1 className="font-serif-headline text-4xl md:text-5xl lg:text-5xl font-bold text-text-primary leading-[1.1] mb-6">
                 {slides[currentIndex].title}
               </h1>
               <p className="font-body text-xl text-text-muted mb-10 max-w-lg leading-relaxed">
