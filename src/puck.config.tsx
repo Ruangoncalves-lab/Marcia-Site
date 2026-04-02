@@ -11,6 +11,8 @@ import { Testimonials } from "./components/sections/Testimonials";
 import { Sustainability } from "./components/sections/Sustainability";
 import { Cta } from "./components/sections/Cta";
 import { VisualProof } from "./components/sections/VisualProof";
+import { About } from "./components/sections/About";
+import { Contact } from "./components/sections/Contact";
 
 const imageField = {
     type: "custom" as const,
@@ -509,6 +511,56 @@ export const config: Config<any> = {
                 bgText: "ECOFOODPACK"
             },
             render: (props) => <Cta {...props} />
+        },
+        About: {
+            fields: {
+                badge: { type: "text" },
+                title: { type: "text" },
+                subtitle: { type: "text" },
+                description: { type: "textarea" },
+                stats: {
+                    type: "array",
+                    arrayFields: {
+                        label: { type: "text" },
+                        value: { type: "text" }
+                    }
+                }
+            },
+            defaultProps: {
+                badge: "Nossa História",
+                title: "Sustentabilidade e Inovação",
+                subtitle: "Desde o início dos anos 2000 no mercado gráfico.",
+                description: "A MCosta Representações e a Ecofoodpack nasceram com o DNA de solucionar problemas ambientais através de embalagens práticas e de baixo impacto.",
+                stats: [
+                    { label: "Experiência", value: "+20 Anos" },
+                    { label: "Certificação", value: "Kraft FSC" },
+                    { label: "Eco-Friendly", value: "100%" }
+                ]
+            },
+            render: (props) => <About {...props} />
+        },
+        Contact: {
+            fields: {
+                title: { type: "text" },
+                subtitle: { type: "text" },
+                description: { type: "textarea" },
+                phone_whatsapp: { type: "text" },
+                phone_fixed: { type: "text" },
+                email: { type: "text" },
+                instagram: { type: "text" },
+                whatsapp_link: { type: "text" }
+            },
+            defaultProps: {
+                title: "Vamos Iniciar um Projeto?",
+                subtitle: "Falar com Especialista",
+                description: "Seja para tirar dúvidas sobre materiais ou solicitar um orçamento personalizado.",
+                phone_whatsapp: "(21) 96014-2258",
+                phone_fixed: "(22) 2654-2082",
+                email: "contato@ecofoodpack.com.br",
+                instagram: "@mcostaecofoodpack",
+                whatsapp_link: "https://wa.me/5521960142258"
+            },
+            render: (props) => <Contact {...props} />
         }
     },
 };

@@ -15,7 +15,7 @@ export const Page = () => {
         : (path === '/' ? defaultHomeData : defaultAboutData);
 
     return (
-        <div className="min-h-screen bg-surface-page flex flex-col font-body text-text-primary pt-[130px]">
+        <div className="min-h-screen bg-surface-page flex flex-col font-body text-text-primary">
             <Navbar />
             <main className="flex-grow">
                 {/* Render the saved blocks via Puck Render */}

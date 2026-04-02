@@ -1,7 +1,7 @@
 import { useState, forwardRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { ChevronDown, Search, Heart, User, ShoppingCart, Facebook, Twitter, Instagram, Youtube, Globe } from 'lucide-react';
+import { ChevronDown, Search, Heart, User, ShoppingCart, Instagram, Youtube, Globe } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import './Navbar.css';
 
@@ -58,20 +58,15 @@ export const Navbar = () => {
     return (
         <>
             {/* Top Banner */}
-            <div className="fixed top-0 left-0 right-0 h-[40px] bg-[#ff7c08] text-white z-50 flex items-center px-4 lg:px-12 text-sm font-body justify-between border-b border-orange-600/30">
-                <div>
-                   Bem-vindo à MCosta Representações!
+            <div className="fixed top-0 left-0 right-0 h-[45px] bg-[#ff7c08] text-white z-50 flex items-center px-4 lg:px-12 text-xs md:text-sm font-body justify-between shadow-sm">
+                <div className="truncate pr-4">
+                   🌱 Bem-vindo à MCosta Representações!
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4 md:gap-6">
                     <div className="hidden sm:flex items-center gap-1 cursor-pointer hover:text-gray-200 transition">
                         <Globe size={14} /> PT-BR <ChevronDown size={14} />
                     </div>
-                    <div className="hidden sm:flex items-center gap-1 cursor-pointer hover:text-gray-200 transition">
-                        BRL <ChevronDown size={14} />
-                    </div>
                     <div className="flex items-center gap-3">
-                        <a href="#" className="hover:text-gray-200 transition"><Facebook size={14} fill="currentColor" strokeWidth={0} /></a>
-                        <a href="#" className="hover:text-gray-200 transition"><Twitter size={14} fill="currentColor" strokeWidth={0} /></a>
                         <a href="https://www.instagram.com/mcostaecofoodpack/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition"><Instagram size={14} /></a>
                         <a href="#" className="hover:text-gray-200 transition"><Youtube size={14} /></a>
                     </div>
@@ -85,7 +80,7 @@ export const Navbar = () => {
                     boxShadow: navShadow,
                     top: navTop
                 }}
-                className="fixed left-0 right-0 z-40 transition-colors duration-300"
+                className="fixed left-0 right-0 z-40 transition-all duration-300 border-b border-transparent data-[scrolled=true]:border-gray-100"
             >
                 <div className="max-w-[1400px] mx-auto px-4 lg:px-8 h-[90px] flex items-center justify-between">
                     <a href="/" className="flex items-center gap-2 relative z-50 mr-8">
@@ -110,7 +105,7 @@ export const Navbar = () => {
 
                                 <NavigationMenu.Item>
                                     <NavigationMenu.Trigger className="nav-trigger group">
-                                        Loja <ChevronDown className="nav-chevron transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
+                                        Explorar <ChevronDown className="nav-chevron transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
                                     </NavigationMenu.Trigger>
                                     <NavigationMenu.Content className="nav-content absolute top-0 left-0 w-full sm:w-auto">
                                         <ul className="m-0 grid list-none gap-x-2 gap-y-1 p-4 sm:w-[500px] sm:grid-cols-2 lg:w-[600px]">
@@ -123,8 +118,8 @@ export const Navbar = () => {
                                 </NavigationMenu.Item>
 
                                 <NavigationMenu.Item>
-                                    <NavigationMenu.Link className="nav-link block select-none rounded-md px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none hover:bg-gray-100 hover:text-accent-primary" href="/quem-somos">
-                                        Sobre Nós
+                                    <NavigationMenu.Link className="nav-link block select-none rounded-md px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none hover:bg-gray-100 hover:text-accent-primary" href="#quem-somos">
+                                        Quem Somos
                                     </NavigationMenu.Link>
                                 </NavigationMenu.Item>
 
@@ -179,10 +174,10 @@ export const Navbar = () => {
                         className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full left-0 top-full"
                     >
                         <div className="px-6 py-6 flex flex-col gap-2 overflow-y-auto max-h-[70vh]">
-                            <a href="/" className="font-bold py-3 border-b border-gray-100 flex justify-between">Home <ChevronDown size={16}/></a>
-                            <a href="#produtos" className="font-bold py-3 border-b border-gray-100 flex justify-between">Loja <ChevronDown size={16}/></a>
-                            <a href="/quem-somos" className="font-bold py-3 border-b border-gray-100">Sobre Nós</a>
-                            <a href="#contato" className="font-bold py-3">Contato</a>
+                            <a href="#" onClick={() => setMobileOpen(false)} className="font-bold py-3 border-b border-gray-100">Home</a>
+                            <a href="#quem-somos" onClick={() => setMobileOpen(false)} className="font-bold py-3 border-b border-gray-100">Quem Somos</a>
+                            <a href="#produtos" onClick={() => setMobileOpen(false)} className="font-bold py-3 border-b border-gray-100">Produtos</a>
+                            <a href="#contato" onClick={() => setMobileOpen(false)} className="font-bold py-3">Contato</a>
                         </div>
                     </motion.div>
                 )}

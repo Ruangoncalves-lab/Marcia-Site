@@ -3,30 +3,31 @@ export const defaultHomeData = {
         {
             "type": "HeroSlider",
             "props": {
+                "id": "hero-1",
                 "slides": [
                     {
                         "id": "1",
                         "badge": "Ecofoodpack — 100% Sustentável",
                         "title": "Embalagens que Valorizam sua Marca.",
                         "subtitle": "Destaque-se com o Kraft Certificado e garanta a melhor experiência para seu cliente.",
-                        "buttonText": "Explorar Catálogo",
+                        "buttonText": "Conhecer Produtos",
                         "buttonLink": "#produtos",
                         "image": "/ecofood_packaging_hero_product_1775152849305.png" 
                     },
                     {
                         "id": "2",
-                        "badge": "Compromisso Verde",
-                        "title": "Inovação em Cada Detalhe Ecológico.",
-                        "subtitle": "Consumidores premium preferem marcas que reduzem o uso de plásticos descartáveis.",
-                        "buttonText": "Nossa Missão",
-                        "buttonLink": "#sobre",
+                        "badge": "Nossa Missão",
+                        "title": "Conectando Negócios a um Futuro Verde.",
+                        "subtitle": "Desde o início dos anos 2000, unindo alta tecnologia com baixo impacto ambiental.",
+                        "buttonText": "Quem Somos",
+                        "buttonLink": "#quem-somos",
                         "image": "/ecofood_sustainability_hero_detail_1775152908993.png"
                     },
                     {
                         "id": "3",
-                        "badge": "Linha Completa",
+                        "badge": "Atendimento Especializado",
                         "title": "Soluções Versáteis para seu Delivery.",
-                        "subtitle": "De potes a sacolas personalizadas. Tudo o que seu negócio precisa em um só lugar.",
+                        "subtitle": "Representante oficial Ecofoodpack. Qualidade certificada para o seu restaurante.",
                         "buttonText": "Solicitar Orçamento",
                         "buttonLink": "#contato",
                         "image": "/ecofood_catalog_hero_arrangement_1775152928875.png"
@@ -34,115 +35,74 @@ export const defaultHomeData = {
                 ]
             }
         },
-        { type: "PromoBanners", props: { id: "promo-1" } },
         {
-            type: "Products",
-            props: {
-                id: "prod-1",
-                titleStart: "Nossos",
-                titleHighlight: "Produtos",
-                subtitle: "Representamos a linha completa de embalagens EcoFoodPack, líderes em soluções sustentáveis para o setor alimentício.",
-                products: [
-                    { id: "1", title: 'Linha Kraft', category: 'Quentes e Frios', description: 'Embalagens kraft para delivery, ideais para alimentos quentes e frios. Resistência e praticidade em um só produto.', iconType: 'kraft', tags: ['Kraft', 'Resistente'] },
-                    { id: "2", title: 'Linha Kraft Plus', category: 'Premium', description: 'Versão premium com maior resistência e acabamento diferenciado. Perfeita para quem busca excelência.', iconType: 'kraft', tags: ['Premium', 'Kraft'] },
-                    { id: "3", title: 'Linha P&B', category: 'Alimentos Secos', description: 'Embalagens brancas e kraft para alimentos secos. Versatilidade para diversos tipos de negócio.', iconType: 'print', tags: ['Branco', 'Secos'] },
-                    { id: "4", title: 'Embalagens Seladas', category: 'Alto Vácuo', description: 'Bandejas e tampas para selagem a vácuo. Mantenha seus produtos frescos por mais tempo.', iconType: 'selada', tags: ['Vácuo', 'Tampas'] },
-                    { id: "5", title: 'Potes e Copos', category: 'Bebidas e Alimentos', description: 'Linha completa de potes e copos para bebidas e alimentos. Qualidade que seu cliente percebe.', iconType: 'selada', tags: ['Bebidas', 'Sopas'] },
-                    { id: "6", title: 'Personalizados', category: 'Marca Própria', description: 'Produtos com personalização exclusiva para sua marca. Destaque-se da concorrência.', iconType: 'print', tags: ['Personalizado', 'Branding'] }
+            "type": "About",
+            "props": {
+                "id": "about-1",
+                "badge": "Quem Somos",
+                "title": "Experiência e Compromisso",
+                "subtitle": "DNA focado em soluções ambientais.",
+                "description": "A MCosta Representações atua no mercado gráfico desde o início dos anos 2000. Como representante da Ecofoodpack, nossa missão é fornecer embalagens de alta tecnologia que resolvem problemas ambientais através de soluções práticas, utilizando matérias-primas 100% renováveis.",
+                "stats": [
+                    { "label": "No Mercado", "value": "+20 Anos" },
+                    { "label": "Produtos", "value": "50+" },
+                    { "label": "Sustentável", "value": "100%" }
                 ]
             }
         },
-        { type: "Categories", props: { id: "cat-1" } },
         {
-            type: "Benefits",
-            props: {
-                id: "ben-1",
-                titleStart: "Temos a nossa",
-                titleHighlight: "Garantia",
-                subtitle: "Mais do que representação, entregamos resultados e compromisso.",
-                experienceValue: "+50",
-                experienceText: "Tipos de Produtos",
-                projectsValue: "+500",
-                projectsText: "Clientes Atendidos",
-                benefits: [
-                    { id: "1", title: '100% Sustentável', description: 'A EcoFoodPack garante materiais ecológicos.', metrics: '100%' },
-                    { id: "2", title: 'Avaliação 5 Estrelas', description: 'Satisfação garantida pelos restaurantes parceiros.', metrics: '5★' },
-                    { id: "3", title: 'Atendimento Próximo', description: 'Contato ágil via WhatsApp ou e-mail.', metrics: 'Rápido' }
+            "type": "Categories",
+            "props": {
+                "id": "cat-1",
+                "title": "Nossas Linhas",
+                "subtitle": "Embalagens sustentáveis para cada tipo de alimento.",
+                "categories": [
+                    { "id": "1", "title": "Linha Kraft", "items": "Bandejas, Caixas e Marmitas", "iconType": "kraft" },
+                    { "id": "2", "title": "Linha Oriental", "items": "Box Kraft, Branca e Personalizada", "iconType": "oriental" },
+                    { "id": "3", "title": "Potes & Copos", "items": "Copos de papel, Potes e Tampas", "iconType": "potes" },
+                    { "id": "4", "title": "Sacos & Sacolas", "items": "Papel SOS e Sacolas de Viagem", "iconType": "sacolas" }
                 ]
             }
         },
-        { type: "Testimonials", props: { id: "test-1" } },
         {
-            type: "Cta",
-            props: {
-                id: "cta-1",
-                badgeText: "Fale Conosco",
-                titleStart: "Envie sua",
-                titleHighlight: "Mensagem",
-                subtitle: "Receba novidades e tire dúvidas. E-mail: mcostaecofoodpack@gmail.com",
-                primaryButtonText: "Chamar no WhatsApp",
-                secondaryButtonText: "Voltar ao topo",
-                primaryButtonLink: "https://wa.me/5521982336850",
-                bgText: "CONTATO"
+            "type": "Products",
+            "props": {
+                "id": "prod-1",
+                "titleStart": "Destaques do",
+                "titleHighlight": "Catálogo",
+                "subtitle": "Confira as soluções mais procuradas para um delivery premium e sustentável.",
+                "products": [
+                    { "id": "1", "title": "Bandeja Kraft Multiuso", "category": "Linha Kraft", "description": "Resistência e estética natural para porções e lanches.", "iconType": "kraft", "tags": "Ecológico, Kraft" },
+                    { "id": "2", "title": "Box Oriental", "category": "Linha Oriental", "description": "Design clássico com vedação superior para culinária asiática.", "iconType": "oriental", "tags": "Veda Bem, Térmica" },
+                    { "id": "3", "title": "Embalagens Seladas", "category": "Higiene Total", "description": "Segurança contra vazamentos, ideal para Delivery de alto fluxo.", "iconType": "selada", "tags": "Anti-Vazamento" }
+                ]
+            }
+        },
+        {
+            "type": "Testimonials",
+            "props": {
+                "id": "test-1",
+                "title": "O que dizem nossos parceiros",
+                "subtitle": "Satisfação garantida em cada entrega."
+            }
+        },
+        {
+            "type": "Contact",
+            "props": {
+                "id": "contact-1",
+                "title": "Pronto para Mudar?",
+                "subtitle": "Fale com nosso Time",
+                "description": "Estamos prontos para tirar suas dúvidas sobre materiais, personalização e prazos de entrega.",
+                "phone_whatsapp": "(21) 96014-2258",
+                "phone_fixed": "(22) 2654-2082",
+                "email": "contato@ecofoodpack.com.br",
+                "instagram": "@mcostaecofoodpack",
+                "whatsapp_link": "https://wa.me/5521960142258"
             }
         }
     ],
     root: {}
 };
 
-export const defaultAboutData = {
-    content: [
-        {
-            type: "Hero",
-            props: {
-                id: "hero-about",
-                badgeText: "Sobre Nós",
-                titleStart: "Especialistas em",
-                titleHighlight: "Embalagens",
-                titleEnd: "Sustentáveis",
-                description: "A MCosta Representações é uma empresa especializada em representação comercial de embalagens sustentáveis. Como representante autorizado da EcoFoodPack, oferecemos soluções completas em embalagens para restaurantes, fast food, delivery e estabelecimentos alimentícios em geral.",
-                primaryButtonText: "Ver Produtos",
-                secondaryButtonText: "Falar com Consultor",
-                whatsappLink: "https://wa.me/5521982336850"
-            }
-        },
-        {
-            type: "Process",
-            props: {
-                id: "proc-about",
-                title: "Nossos Pilares",
-                subtitle: "O que nos move diariamente",
-                steps: [
-                    { id: "1", num: "1", title: "Missão", description: "Conectar empresas a produtos de qualidade que respeitam o meio ambiente, com atendimento personalizado." },
-                    { id: "2", num: "2", title: "Visão", description: "Ser referência em representação comercial de embalagens sustentáveis." },
-                    { id: "3", num: "3", title: "Valores", description: "Ética, transparência e compromisso inabalável com o cliente e a natureza." }
-                ]
-            }
-        },
-        {
-            type: "Sustainability",
-            props: {
-                id: "sust-about",
-                badgeText: "Inovação Eco-Friendly",
-                titleStart: "Indo além da",
-                titleHighlight: "Caixinha",
-                subtitle: "Nossa missão é conectar empresas a produtos de qualidade que respeitam o meio ambiente, proporcionando um atendimento personalizado e comprometido com a satisfação de nossos clientes.",
-                imageBadge1: "ECOFOODPACK",
-                imageBadge2: "100% SUSTENTÁVEL"
-            }
-        },
-        {
-            type: "Cta",
-            props: {
-                id: "cta-about",
-                badgeText: "Fale Conosco",
-                titleStart: "Entre em",
-                titleHighlight: "Contato",
-                subtitle: "E-mail: mcostaecofoodpack@gmail.com | (21) 98233-6850",
-                primaryButtonText: "Chamar no WhatsApp",
-                primaryButtonLink: "https://wa.me/5521982336850"
-            }
-        }
-    ],
-    root: {}
-};
+// We keep the about data for legacy if needed, but the focus is now the single-page Home
+export const defaultAboutData = defaultHomeData;
