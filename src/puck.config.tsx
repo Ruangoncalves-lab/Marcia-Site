@@ -109,6 +109,13 @@ export const config: Config<any> = {
                         buttonText: { type: "text" },
                         buttonLink: { type: "text" },
                         image: imageField,
+                        layout: {
+                            type: "select",
+                            options: [
+                                { label: "Texto + Imagem Direita (Dividido)", value: "split" },
+                                { label: "Arte Completa 16:9 (Fundo)", value: "full" }
+                            ]
+                        }
                     },
                     defaultItemProps: {
                         badge: "Ecofoodpack — Sustentável",
@@ -128,7 +135,8 @@ export const config: Config<any> = {
                         subtitle: "Destaque-se com o Kraft Certificado e garanta a melhor experiência para seu cliente.",
                         buttonText: "Explorar Catálogo",
                         buttonLink: "#produtos",
-                        image: "/ecofood_packaging_hero_product_1775152849305.png" 
+                        image: "/ecofood_packaging_hero_product_1775152849305.png",
+                        layout: "split"
                     },
                     {
                         id: "2",
@@ -137,7 +145,8 @@ export const config: Config<any> = {
                         subtitle: "Consumidores premium preferem marcas que reduzem o uso de plásticos descartáveis.",
                         buttonText: "Nossa Missão",
                         buttonLink: "#sobre",
-                        image: "/ecofood_sustainability_hero_detail_1775152908993.png"
+                        image: "/ecofood_sustainability_hero_detail_1775152908993.png",
+                        layout: "split"
                     },
                     {
                         id: "3",
@@ -146,7 +155,8 @@ export const config: Config<any> = {
                         subtitle: "De potes a sacolas personalizadas. Tudo o que seu negócio precisa em um só lugar.",
                         buttonText: "Solicitar Orçamento",
                         buttonLink: "#contato",
-                        image: "/ecofood_catalog_hero_arrangement_1775152928875.png"
+                        image: "/ecofood_catalog_hero_arrangement_1775152928875.png",
+                        layout: "split"
                     }
                 ]
             },

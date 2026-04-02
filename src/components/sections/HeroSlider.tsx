@@ -11,6 +11,7 @@ export interface SlideData {
   buttonText: string;
   buttonLink: string;
   image: string;
+  layout?: "split" | "full";
 }
 
 export interface HeroSliderProps {
@@ -25,7 +26,8 @@ const defaultSlides: SlideData[] = [
     subtitle: "Destaque-se com o Kraft Certificado e garanta a melhor experiência para seu cliente.",
     buttonText: "Explorar Catálogo",
     buttonLink: "#produtos",
-    image: "/ecofood_packaging_hero_product_1775152849305.png" 
+    image: "/ecofood_packaging_hero_product_1775152849305.png",
+    layout: "split"
   },
   {
     id: "2",
@@ -34,7 +36,8 @@ const defaultSlides: SlideData[] = [
     subtitle: "Consumidores premium preferem marcas que reduzem o uso de plásticos descartáveis.",
     buttonText: "Nossa Missão",
     buttonLink: "#sobre",
-    image: "/ecofood_sustainability_hero_detail_1775152908993.png"
+    image: "/ecofood_sustainability_hero_detail_1775152908993.png",
+    layout: "split"
   },
   {
     id: "3",
@@ -43,7 +46,8 @@ const defaultSlides: SlideData[] = [
     subtitle: "De potes a sacolas personalizadas. Tudo o que seu negócio precisa em um só lugar.",
     buttonText: "Solicitar Orçamento",
     buttonLink: "#contato",
-    image: "/ecofood_catalog_hero_arrangement_1775152928875.png"
+    image: "/ecofood_catalog_hero_arrangement_1775152928875.png",
+    layout: "split"
   }
 ];
 
@@ -92,16 +96,16 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
   };
 
   return (
-    <section className="hero-slider-wrap">
-      <div className="absolute inset-0 bg-texture opacity-[0.03] pointer-events-none z-0"></div>
+    <section className="hero-slider-wrap relative w-full overflow-hidden">
+      <div className="absolute inset-0 bg-texture opacity-[0.03] pointer-events-none z-[1]"></div>
       
       {/* Organic Ornaments */}
-      <div className="ornament ornament-top">
+      <div className="ornament ornament-top z-[1]">
         <svg viewBox="0 0 100 100" className="w-48 h-48 opacity-10">
           <path d="M50 0C50 0 80 30 80 60C80 90 50 100 50 100C50 100 20 90 20 60C20 30 50 0 50 0Z" fill="currentColor" className="text-secondary-100" />
         </svg>
       </div>
-      <div className="ornament ornament-bottom">
+      <div className="ornament ornament-bottom z-[1]">
         <svg viewBox="0 0 100 100" className="w-64 h-64 opacity-5">
            <path d="M50 0C50 0 80 30 80 60C80 90 50 100 50 100C50 100 20 90 20 60C20 30 50 0 50 0Z" fill="currentColor" className="text-primary-100" />
         </svg>
@@ -120,51 +124,80 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.5 }
             }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full pt-20"
+            className={`w-full h-full relative z-[2] pt-20 ${slides[currentIndex].layout === 'full' ? 'flex flex-col justify-center' : 'grid grid-cols-1 lg:grid-cols-2 gap-8 items-center'}`}
           >
-            {/* Left Content */}
-            <motion.div 
-              className="slide-content z-10"
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <div className="mb-6 inline-flex items-center gap-2">
-                <span className="slide-badge">{slides[currentIndex].badge}</span>
+            {/* If full layout, render background image */}
+            {slides[currentIndex].layout === 'full' && (
+              <div className="absolute inset-0 w-full h-full z-[-1] overflow-hidden">
+                <motion.img 
+                  src={slides[currentIndex].image} 
+                  alt={slides[currentIndex].title}
+                  className="w-full h-full object-cover"
+                  variants={imageVariants}
+                  initial="hidden"
+                  animate="visible"
+                />
+                {/* Optional dark gradient if they keep text, but if no text, they can just use an image with baked text */}
+                {(slides[currentIndex].title || slides[currentIndex].subtitle) && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+                )}
               </div>
-              <h1 className="font-serif-headline text-4xl md:text-5xl lg:text-5xl font-bold text-text-primary leading-[1.1] mb-6">
-                {slides[currentIndex].title}
-              </h1>
-              <p className="font-body text-xl text-text-muted mb-10 max-w-lg leading-relaxed">
-                {slides[currentIndex].subtitle}
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a href={slides[currentIndex].buttonLink} className="inline-block">
-                  <button className="btn-grocee font-bold uppercase tracking-widest text-sm py-5 px-10 rounded-full transition-all flex items-center gap-2 group">
-                    {slides[currentIndex].buttonText}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </a>
-              </div>
-            </motion.div>
+            )}
 
-            {/* Right Image */}
-            <motion.div 
-              className="slide-image-wrap flex justify-center lg:justify-end items-center relative overflow-hidden"
-              variants={imageVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <div className="relative w-full max-w-[480px] aspect-[4/5] flex items-center justify-center mx-auto">
-                 {/* Floating background circle */}
-                 <div className="absolute inset-0 bg-accent-subtle/30 rounded-full blur-3xl scale-110 z-0"></div>
-                 <img 
-                   src={slides[currentIndex].image} 
-                   alt={slides[currentIndex].title}
-                   className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
-                 />
-              </div>
-            </motion.div>
+            {/* Left Content */}
+            {(slides[currentIndex].badge || slides[currentIndex].title || slides[currentIndex].subtitle) && (
+              <motion.div 
+                className={`slide-content relative z-10 ${slides[currentIndex].layout === 'full' ? 'max-w-2xl px-6 lg:px-12' : ''}`}
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {slides[currentIndex].badge && (
+                  <div className="mb-6 inline-flex items-center gap-2">
+                    <span className="slide-badge">{slides[currentIndex].badge}</span>
+                  </div>
+                )}
+                {slides[currentIndex].title && (
+                  <h1 className={`font-serif-headline text-4xl md:text-5xl lg:text-5xl font-bold leading-[1.1] mb-6 ${slides[currentIndex].layout === 'full' ? 'text-white' : 'text-text-primary'}`}>
+                    {slides[currentIndex].title}
+                  </h1>
+                )}
+                {slides[currentIndex].subtitle && (
+                  <p className={`font-body text-xl mb-10 max-w-lg leading-relaxed ${slides[currentIndex].layout === 'full' ? 'text-white/90 drop-shadow-md' : 'text-text-muted'}`}>
+                    {slides[currentIndex].subtitle}
+                  </p>
+                )}
+                {slides[currentIndex].buttonText && (
+                  <div className="flex flex-wrap gap-4 mt-6">
+                    <a href={slides[currentIndex].buttonLink} className="inline-block">
+                      <button className="btn-grocee font-bold uppercase tracking-widest text-sm py-5 px-10 rounded-full transition-all flex items-center gap-2 group">
+                        {slides[currentIndex].buttonText}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </a>
+                  </div>
+                )}
+              </motion.div>
+            )}
+
+            {/* Right Image (only if split) */}
+            {(!slides[currentIndex].layout || slides[currentIndex].layout === 'split') && (
+              <motion.div 
+                className="slide-image-wrap flex justify-center lg:justify-end items-center relative overflow-hidden"
+                variants={imageVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <div className="relative w-full max-w-[480px] aspect-[4/5] flex items-center justify-center mx-auto">
+                   <div className="absolute inset-0 bg-accent-subtle/30 rounded-full blur-3xl scale-110 z-0"></div>
+                   <img 
+                     src={slides[currentIndex].image} 
+                     alt={slides[currentIndex].title}
+                     className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
+                   />
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </AnimatePresence>
 
