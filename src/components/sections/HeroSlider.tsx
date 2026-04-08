@@ -11,7 +11,7 @@ export interface SlideData {
   buttonText: string;
   buttonLink: string;
   image: string;
-  layout?: "split" | "full";
+  layout?: "split" | "full" | "banner";
 }
 
 export interface HeroSliderProps {
@@ -55,14 +55,23 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Guard: reset index when slides are deleted in the editor
   useEffect(() => {
+    if (slides.length > 0 && currentIndex >= slides.length) {
+      setCurrentIndex(slides.length - 1);
+    }
+  }, [slides.length, currentIndex]);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       paginate(1);
     }, 8000);
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, slides.length]);
 
   const paginate = (newDirection: number) => {
+    if (slides.length <= 1) return;
     setDirection(newDirection);
     const nextIndex = (currentIndex + newDirection + slides.length) % slides.length;
     setCurrentIndex(nextIndex);
@@ -95,8 +104,21 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
     visible: { opacity: 1, scale: 1, rotate: 0, transition: { duration: 1, delay: 0.3 } }
   };
 
+  // Safe access: never crash if currentIndex is temporarily out of bounds
+  const safeIndex = Math.min(currentIndex, Math.max(0, slides.length - 1));
+  const safeSlide = slides[safeIndex];
+
+  // While slides array is empty or undefined, render an empty placeholder
+  if (!safeSlide) {
+    return (
+      <section className="hero-slider-wrap relative w-full overflow-hidden flex items-center justify-center min-h-[400px]">
+        <p className="text-gray-400 text-sm italic">Adicione um slide para começar.</p>
+      </section>
+    );
+  }
+
   return (
-    <section className="hero-slider-wrap relative w-full overflow-hidden">
+    <section className={`hero-slider-wrap relative w-full overflow-hidden ${safeSlide.layout === 'banner' ? 'hero-slider-banner-mode' : ''}`}>
       <div className="absolute inset-0 bg-texture opacity-[0.03] pointer-events-none z-[1]"></div>
       
       {/* Organic Ornaments */}
@@ -125,55 +147,95 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
           }}
           className="absolute inset-0 w-full h-full"
         >
-          {/* If full layout, render FULL WIDTH background image */}
-          {slides[currentIndex].layout === 'full' && (
+          {/* BANNER mode: imagem inteira sem corte como fundo */}
+          {safeSlide.layout === 'banner' && (
+            <div className="absolute inset-0 w-full h-full z-0">
+              {/* Fundo difuso da própria imagem para preencher bordas sem esticar */}
+              <img 
+                src={safeSlide.image}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40"
+              />
+              <motion.img 
+                src={safeSlide.image} 
+                alt={safeSlide.title}
+                className="relative w-full h-full object-contain z-10"
+                variants={imageVariants}
+                initial="hidden"
+                animate="visible"
+              />
+              {/* Overlay suave para texto legível */}
+              {(safeSlide.title || safeSlide.subtitle) && (
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-20"></div>
+              )}
+            </div>
+          )}
+
+          {/* FULL mode: imagem como fundo em cover (pode cortar) */}
+          {safeSlide.layout === 'full' && (
             <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
               <motion.img 
-                src={slides[currentIndex].image} 
-                alt={slides[currentIndex].title}
+                src={safeSlide.image} 
+                alt={safeSlide.title}
                 className="w-full h-full object-cover object-center"
                 variants={imageVariants}
                 initial="hidden"
                 animate="visible"
               />
-              {/* Dark overlay if text is present */}
-              {(slides[currentIndex].title || slides[currentIndex].subtitle) && (
+              {(safeSlide.title || safeSlide.subtitle) && (
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
               )}
             </div>
           )}
 
           <div className="max-w-[1240px] mx-auto px-6 h-full relative z-10 flex">
-            <div className={`w-full h-full w-full pt-16 md:pt-20 lg:pt-24 ${slides[currentIndex].layout === 'full' ? 'flex flex-col justify-center pb-20' : 'grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pb-12'}`}>
+            <div className={`w-full h-full pt-16 md:pt-20 lg:pt-24 ${
+              safeSlide.layout === 'full' || safeSlide.layout === 'banner'
+                ? 'flex flex-col justify-end pb-20' 
+                : 'grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pb-12'
+            }`}>
             
               {/* Left Content */}
-              {(slides[currentIndex].badge || slides[currentIndex].title || slides[currentIndex].subtitle) && (
+              {(safeSlide.badge || safeSlide.title || safeSlide.subtitle) && (
                 <motion.div 
-                  className={`slide-content relative z-20 ${slides[currentIndex].layout === 'full' ? 'max-w-2xl px-2 lg:px-6' : ''}`}
+                  className={`slide-content relative z-20 ${
+                    safeSlide.layout === 'full' || safeSlide.layout === 'banner'
+                      ? 'max-w-2xl px-2 lg:px-6' 
+                      : ''
+                  }`}
                   variants={contentVariants}
                   initial="hidden"
                   animate="visible"
                 >
-                  {slides[currentIndex].badge && (
+                  {safeSlide.badge && (
                     <div className="mb-6 inline-flex items-center gap-2">
-                      <span className="slide-badge">{slides[currentIndex].badge}</span>
+                      <span className="slide-badge">{safeSlide.badge}</span>
                     </div>
                   )}
-                  {slides[currentIndex].title && (
-                    <h1 className={`font-serif-headline text-4xl md:text-5xl lg:text-5xl font-bold leading-[1.1] mb-6 ${slides[currentIndex].layout === 'full' ? 'text-white' : 'text-text-primary'}`}>
-                      {slides[currentIndex].title}
+                  {safeSlide.title && (
+                    <h1 className={`font-serif-headline text-4xl md:text-5xl lg:text-5xl font-bold leading-[1.1] mb-6 ${
+                      safeSlide.layout === 'full' || safeSlide.layout === 'banner' 
+                        ? 'text-white drop-shadow-lg' 
+                        : 'text-text-primary'
+                    }`}>
+                      {safeSlide.title}
                     </h1>
                   )}
-                  {slides[currentIndex].subtitle && (
-                    <p className={`font-body text-xl mb-10 max-w-lg leading-relaxed ${slides[currentIndex].layout === 'full' ? 'text-white/90 drop-shadow-md' : 'text-text-muted'}`}>
-                      {slides[currentIndex].subtitle}
+                  {safeSlide.subtitle && (
+                    <p className={`font-body text-xl mb-10 max-w-lg leading-relaxed ${
+                      safeSlide.layout === 'full' || safeSlide.layout === 'banner'
+                        ? 'text-white/90 drop-shadow-md' 
+                        : 'text-text-muted'
+                    }`}>
+                      {safeSlide.subtitle}
                     </p>
                   )}
-                  {slides[currentIndex].buttonText && (
+                  {safeSlide.buttonText && (
                     <div className="flex flex-wrap gap-4 mt-6">
-                      <a href={slides[currentIndex].buttonLink} className="inline-block">
+                      <a href={safeSlide.buttonLink} className="inline-block">
                         <button className="btn-grocee font-bold uppercase tracking-widest text-sm py-5 px-10 rounded-full transition-all flex items-center gap-2 group">
-                          {slides[currentIndex].buttonText}
+                          {safeSlide.buttonText}
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
                       </a>
@@ -183,9 +245,9 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
               )}
 
               {/* Right Image (only if split) */}
-              {(!slides[currentIndex].layout || slides[currentIndex].layout === 'split') && (
+              {(!safeSlide.layout || safeSlide.layout === 'split') && (
                 <motion.div 
-                  className="slide-image-wrap flex justify-center lg:justify-end items-center relative overflow-hidden h-full max-h-[500px]"
+                  className="slide-image-wrap flex justify-center lg:justify-end items-center relative overflow-hidden h-full max-h-[480px]"
                   variants={imageVariants}
                   initial="hidden"
                   animate="visible"
@@ -193,8 +255,8 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
                   <div className="relative w-full max-w-[480px] aspect-[4/5] flex items-center justify-center mx-auto">
                      <div className="absolute inset-0 bg-accent-subtle/30 rounded-full blur-3xl scale-110 z-0"></div>
                      <img 
-                       src={slides[currentIndex].image} 
-                       alt={slides[currentIndex].title}
+                       src={safeSlide.image} 
+                       alt={safeSlide.title}
                        className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
                      />
                   </div>
@@ -205,7 +267,8 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
         </motion.div>
       </AnimatePresence>
 
-        {/* Navigation Buttons */}
+      {/* Navigation Buttons (only if more than 1 slide) */}
+      {slides.length > 1 && (
         <div className="absolute bottom-10 left-6 flex gap-4 z-30">
           <button 
             onClick={() => paginate(-1)}
@@ -222,8 +285,10 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
             <ChevronRight size={20} />
           </button>
         </div>
+      )}
 
-        {/* Indicators */}
+      {/* Indicators (only if more than 1 slide) */}
+      {slides.length > 1 && (
         <div className="absolute right-6 bottom-10 flex flex-col gap-3 z-30">
            {slides.map((_, i) => (
              <button
@@ -237,6 +302,7 @@ export const HeroSlider = ({ slides = defaultSlides }: HeroSliderProps) => {
              />
            ))}
         </div>
+      )}
     </section>
   );
 };

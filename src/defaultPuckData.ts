@@ -1,38 +1,11 @@
 export const defaultHomeData = {
     content: [
         {
-            "type": "HeroSlider",
+            "type": "HeroBanner",
             "props": {
-                "id": "hero-1",
-                "slides": [
-                    {
-                        "id": "1",
-                        "badge": "Ecofoodpack — 100% Sustentável",
-                        "title": "Embalagens que Valorizam sua Marca.",
-                        "subtitle": "Destaque-se com o Kraft Certificado e garanta a melhor experiência para seu cliente.",
-                        "buttonText": "Conhecer Produtos",
-                        "buttonLink": "#produtos",
-                        "image": "/ecofood_packaging_hero_product_1775152849305.png" 
-                    },
-                    {
-                        "id": "2",
-                        "badge": "Nossa Missão",
-                        "title": "Conectando Negócios a um Futuro Verde.",
-                        "subtitle": "Desde o início dos anos 2000, unindo alta tecnologia com baixo impacto ambiental.",
-                        "buttonText": "Quem Somos",
-                        "buttonLink": "#quem-somos",
-                        "image": "/ecofood_sustainability_hero_detail_1775152908993.png"
-                    },
-                    {
-                        "id": "3",
-                        "badge": "Atendimento Especializado",
-                        "title": "Soluções Versáteis para seu Delivery.",
-                        "subtitle": "Representante oficial Ecofoodpack. Qualidade certificada para o seu restaurante.",
-                        "buttonText": "Solicitar Orçamento",
-                        "buttonLink": "#contato",
-                        "image": "/ecofood_catalog_hero_arrangement_1775152928875.png"
-                    }
-                ]
+                "id": "hero-banner-1",
+                "image": "/hero-banner.png",
+                "alt": "Embalagens que valorizam a sua marca — MCosta Representações"
             }
         },
         {
@@ -172,7 +145,27 @@ export const defaultHomeData = {
             }
         }
     ],
-    root: {}
+    root: {
+        headerLogo: "/logo-mcosta.png",
+        headerLogoWidth: 150,
+        mobileLogoWidth: 100,
+        topBannerText: "🌱 Bem-vindo à MCosta Representações!",
+        headerEmail: "mcostaecofoodpack@gmail.com",
+        headerPhone: "21 98233-6850",
+        headerAddress: "Rio de Janeiro, Brasil",
+        headerHours: "Seg-Sex: 08:00 - 18:00",
+        topBannerBg: "#ff7c08",
+        topBannerTextColor: "#ffffff",
+        headerBg: "#ffffff",
+        headerTextColor: "#374151",
+        ctaButtonText: "Fale Conosco!",
+        ctaButtonUrl: "https://wa.me/5521982336850",
+        ctaButtonBg: "#255937",
+        facebookUrl: "#",
+        linkedinUrl: "#",
+        instagramUrl: "https://www.instagram.com/mcostaecofoodpack/",
+        whatsappUrl: "https://wa.me/5521982336850"
+    }
 };
 
 // We keep the about data for legacy if needed, but the focus is now the single-page Home

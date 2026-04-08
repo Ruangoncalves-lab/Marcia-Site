@@ -10,6 +10,10 @@ export interface CtaProps {
     primaryButtonLink: string;
     secondaryButtonLink: string;
     bgText: string;
+    // Tipografia
+    fontFamily?: string;
+    fontSize?: number;
+    textColor?: string;
 }
 
 export const Cta = ({
@@ -21,8 +25,24 @@ export const Cta = ({
     secondaryButtonText = "Ver Produtos",
     primaryButtonLink = "https://wa.me/5521960142258",
     secondaryButtonLink = "#produtos",
-    bgText = "ECOFOODPACK"
+    bgText = "ECOFOODPACK",
+    fontFamily = "inherit",
+    fontSize = 0,
+    textColor = ""
 }: CtaProps) => {
+
+    const titleStyle = {
+        fontFamily: fontFamily !== "inherit" ? fontFamily : undefined,
+        fontSize: fontSize > 0 ? `${fontSize}px` : undefined,
+        color: textColor || undefined,
+        lineHeight: "1.1"
+    };
+
+    const textStyle = {
+        fontFamily: fontFamily !== "inherit" ? fontFamily : undefined,
+        color: textColor ? `${textColor}cc` : undefined
+    };
+
     return (
         <section className="py-24 md:py-32 w-full relative overflow-hidden bg-accent-primary text-white" id="contato">
             <div className="absolute inset-0 bg-texture opacity-10"></div>
@@ -38,12 +58,23 @@ export const Cta = ({
                         {badgeText}
                     </div>
 
-                    <h2 className="font-display text-section-title uppercase leading-[1.1] mb-6 whitespace-pre-line">
+                    <h2 
+                        className="font-display text-section-title uppercase leading-[1.1] mb-6 whitespace-pre-line"
+                        style={titleStyle}
+                    >
                         {titleStart} <br />
-                        <span className="text-accent-hover bg-white px-4 rounded transform -rotate-1 inline-block mt-2 shadow-lg">{titleHighlight}</span>
+                        <span 
+                            className="text-accent-primary bg-white px-4 rounded transform -rotate-1 inline-block mt-2 shadow-lg"
+                            style={{ color: textColor ? undefined : "inherit" }}
+                        >
+                            {titleHighlight}
+                        </span>
                     </h2>
 
-                    <p className="font-body text-lg text-white/80 max-w-lg mx-auto mb-10">
+                    <p 
+                        className="font-body text-lg text-white/80 max-w-lg mx-auto mb-10"
+                        style={textStyle}
+                    >
                         {subtitle}
                     </p>
 

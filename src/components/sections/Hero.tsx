@@ -8,6 +8,10 @@ export interface HeroProps {
     secondaryButtonText: string;
     whatsappLink: string;
     image?: string;
+    // Tipografia
+    fontFamily?: string;
+    fontSize?: number;
+    textColor?: string;
 }
 
 export const Hero = ({
@@ -19,8 +23,24 @@ export const Hero = ({
     primaryButtonText = "Explorar Catálogo",
     secondaryButtonText = "Solicitar Orçamento",
     whatsappLink = "https://wa.me/5521960142258",
-    image
+    image,
+    fontFamily = "inherit",
+    fontSize = 0,
+    textColor = ""
 }: HeroProps) => {
+    
+    const titleStyle = {
+        fontFamily: fontFamily !== "inherit" ? fontFamily : undefined,
+        fontSize: fontSize > 0 ? `${fontSize}px` : undefined,
+        color: textColor || undefined,
+        lineHeight: fontSize > 0 ? "1.1" : undefined
+    };
+
+    const textStyle = {
+        fontFamily: fontFamily !== "inherit" ? fontFamily : undefined,
+        color: textColor ? `${textColor}cc` : undefined // Um pouco de transparência para a descrição
+    };
+
     return (
         <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-surface-hero">
             {/* Background pattern/texture */}
@@ -37,14 +57,20 @@ export const Hero = ({
                             {badgeText}
                         </div>
 
-                        <h1 className="font-display text-hero-title leading-[1.05] text-text-primary uppercase tracking-tight">
+                        <h1 
+                            className="font-display text-hero-title leading-[1.05] text-text-primary uppercase tracking-tight"
+                            style={titleStyle}
+                        >
                             {titleStart} <br />
-                            <span className="text-accent-primary italic">{titleHighlight}</span> <br />
+                            <span className="text-accent-primary italic" style={{ color: textColor ? undefined : "inherit" }}>{titleHighlight}</span> <br />
                             {titleEnd}
                         </h1>
                     </div>
 
-                    <p className="font-body text-hero-subtitle text-text-muted max-w-lg leading-relaxed">
+                    <p 
+                        className="font-body text-hero-subtitle text-text-muted max-w-lg leading-relaxed"
+                        style={textStyle}
+                    >
                         {description}
                     </p>
 

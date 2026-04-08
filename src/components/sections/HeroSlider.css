@@ -115,3 +115,19 @@
     padding-bottom: 80px;
   }
 }
+
+/* Banner Mode: imagem inteira sem corte */
+.hero-slider-wrap.hero-slider-banner-mode {
+  aspect-ratio: auto;
+  height: auto;
+  min-height: 400px;
+  max-height: none;
+}
+
+/* Em telas grandes, banner mode usa a proporção natural da imagem */
+@media (min-width: 1025px) {
+  .hero-slider-wrap.hero-slider-banner-mode {
+    min-height: 500px;
+    max-height: 85vh;
+  }
+}

@@ -6,20 +6,50 @@ export interface AboutProps {
     title: string;
     subtitle: string;
     description: string;
+    media?: string; // Pode ser URL de imagem ou vídeo (Base64 ou Link)
     stats: { label: string; value: string }[];
+    // Tipografia
+    fontFamily?: string;
+    fontSize?: number;
+    textColor?: string;
 }
 
 export const About = ({
     badge = "Nossa História",
     title = "Sustentabilidade e Inovação",
     subtitle = "Desde o início dos anos 2000 no mercado gráfico.",
-    description = "A MCosta Representações e a Ecofoodpack nasceram com o DNA de solucionar problemas ambientais através de embalagens práticas e de baixo impacto. Utilizamos equipamentos de última geração para garantir excelência em sustentabilidade, utilizando matérias-primas 100% renováveis e processos que reduzem drasticamente o consumo de energia e água.",
+    description = "A MCosta Representações e a Ecofoodpack nasceram com o DNA de solucionar problemas ambientais através de embalagens práticas e de baixo impacto.",
+    media = "/ecofood_sustainability_hero_detail_1775152908993.png",
     stats = [
         { label: "Experiência", value: "+20 Anos" },
         { label: "Certificação", value: "Kraft FSC" },
         { label: "Eco-Friendly", value: "100%" }
-    ]
+    ],
+    fontFamily = "inherit",
+    fontSize = 0,
+    textColor = ""
 }: AboutProps) => {
+    
+    // Função para detectar se a mídia é um vídeo
+    const isVideo = (url: any) => {
+        if (typeof url !== "string") return false;
+        return url.startsWith("data:video/") || url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".ogg");
+    };
+
+    const isVideoContent = isVideo(media);
+
+    const titleStyle = {
+        fontFamily: fontFamily !== "inherit" ? fontFamily : undefined,
+        fontSize: fontSize > 0 ? `${fontSize}px` : undefined,
+        color: textColor || undefined,
+        lineHeight: "1.2"
+    };
+
+    const textStyle = {
+        fontFamily: fontFamily !== "inherit" ? fontFamily : undefined,
+        color: textColor ? `${textColor}cc` : undefined
+    };
+
     return (
         <section id="quem-somos" className="py-24 bg-white overflow-hidden scroll-mt-20">
             <div className="max-w-[1200px] mx-auto px-6">
@@ -33,17 +63,28 @@ export const About = ({
                         transition={{ duration: 0.8 }}
                         className="relative"
                     >
-                        <div className="aspect-square rounded-2xl bg-surface-hero overflow-hidden relative">
-                            <img 
-                                src="/ecofood_sustainability_hero_detail_1775152908993.png" 
-                                alt="Sustentabilidade" 
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-accent-primary/10 mix-blend-multiply"></div>
+                        <div className="aspect-square rounded-2xl bg-surface-hero overflow-hidden relative shadow-inner border border-gray-100/50">
+                            {isVideoContent ? (
+                                <video 
+                                    src={media}
+                                    autoPlay 
+                                    muted 
+                                    loop 
+                                    playsInline
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <img 
+                                    src={media || "/ecofood_sustainability_hero_detail_1775152908993.png"} 
+                                    alt={title} 
+                                    className="w-full h-full object-cover"
+                                />
+                            )}
+                            <div className="absolute inset-0 bg-accent-primary/5 mix-blend-multiply pointer-events-none"></div>
                         </div>
                         
                         {/* Floating Card */}
-                        <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-2xl shadow-xl max-w-xs border border-gray-100 hidden md:block">
+                        <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-2xl shadow-xl max-w-xs border border-gray-100 hidden md:block z-10">
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-full bg-accent-subtle flex items-center justify-center">
                                     <Leaf className="text-accent-primary" size={24} />
@@ -62,12 +103,18 @@ export const About = ({
                             <Award size={14} /> {badge}
                         </div>
                         
-                        <h2 className="font-serif-headline text-4xl md:text-5xl font-bold text-text-primary leading-[1.2]">
+                        <h2 
+                            className="font-serif-headline text-4xl md:text-5xl font-bold text-text-primary leading-[1.2]"
+                            style={titleStyle}
+                        >
                             {title} <br/>
-                            <span className="text-accent-primary">{subtitle}</span>
+                            <span className="text-accent-primary" style={{ color: textColor ? undefined : "inherit" }}>{subtitle}</span>
                         </h2>
 
-                        <p className="font-body text-lg text-text-muted leading-relaxed">
+                        <p 
+                            className="font-body text-lg text-text-muted leading-relaxed"
+                            style={textStyle}
+                        >
                             {description}
                         </p>
 

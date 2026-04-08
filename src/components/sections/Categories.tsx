@@ -1,3 +1,5 @@
+
+
 export interface CategoryItem {
     id: string;
     title: string;
@@ -17,22 +19,22 @@ export interface CategoriesProps {
 const getIcon = (type: string) => {
     switch (type) {
         case 'kraft': return (
-            <svg viewBox="0 0 24 24" className="w-8 h-8 text-accent-primary" fill="none" stroke="currentColor">
+            <svg viewBox="0 0 24 24" className="w-10 h-10 text-accent-primary" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
         );
         case 'oriental': return (
-            <svg viewBox="0 0 24 24" className="w-8 h-8 text-accent-primary" fill="none" stroke="currentColor">
+            <svg viewBox="0 0 24 24" className="w-10 h-10 text-accent-primary" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3l1.8 1.8M21 3l-1.8 1.8M3 21l1.8-1.8m14.4 0L21 21M9 9h6v6H9V9z" />
             </svg>
         );
         case 'potes': return (
-            <svg viewBox="0 0 24 24" className="w-8 h-8 text-accent-primary" fill="none" stroke="currentColor">
+            <svg viewBox="0 0 24 24" className="w-10 h-10 text-accent-primary" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M7 7h10M9 3h6v4H9V3zM6 12l1 9h10l1-9H6z" />
             </svg>
         );
         case 'sacolas': return (
-            <svg viewBox="0 0 24 24" className="w-8 h-8 text-accent-primary" fill="none" stroke="currentColor">
+            <svg viewBox="0 0 24 24" className="w-10 h-10 text-accent-primary" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
         );
@@ -59,48 +61,61 @@ export const Categories = ({
             <div className="max-w-[1200px] mx-auto px-6 relative z-10">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
                     <div className="max-w-xl">
-                        <h2 className="font-display text-section-title text-text-primary uppercase mb-4">
+                        <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary uppercase mb-4">
                             {title}
                         </h2>
-                        <p className="font-body text-section-subtitle text-text-muted">
+                        <p className="font-body text-lg text-text-muted">
                             {subtitle}
                         </p>
                     </div>
 
                     <a
                         href={linkUrl}
-                        className="btn-secondary px-6 py-3 text-sm group"
+                        className="inline-flex items-center justify-center px-8 py-4 bg-accent-primary text-white font-bold rounded-full hover:bg-black transition-all duration-300 group"
                     >
                         {linkText}
-                        <svg className="w-4 h-4 inline-block ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </a>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
                     {categories.map((category) => (
                         <div
                             key={category.id}
-                            className="bg-surface-section-alt p-10 rounded-card border border-border-subtle hover:border-accent-primary/20 hover:bg-white hover:shadow-card transition-all duration-300 group cursor-pointer"
+                            className="bg-surface-section-alt rounded-[32px] border border-border-subtle hover:border-accent-primary/20 hover:bg-white hover:shadow-2xl hover:shadow-accent-primary/5 transition-all duration-500 group cursor-pointer overflow-hidden flex flex-col"
                         >
-                            {category.image ? (
-                                <div className="w-24 h-24 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 border border-border-subtle group-hover:bg-accent-subtle transition-colors duration-500 overflow-hidden">
-                                    <img src={category.image} className="w-full h-full object-cover" alt={category.title} />
-                                </div>
-                            ) : (
-                                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 border border-border-subtle group-hover:bg-accent-subtle transition-colors duration-500">
-                                    {getIcon(category.iconType)}
-                                </div>
-                            )}
+                            {/* Image Container: 100% width, 4:5 aspect ratio for your photos */}
+                            <div className="w-full aspect-[4/5] relative overflow-hidden bg-gray-100">
+                                {category.image ? (
+                                    <img 
+                                        src={category.image} 
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                                        alt={category.title} 
+                                    />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center bg-gray-50 group-hover:bg-accent-subtle transition-colors duration-500">
+                                        {getIcon(category.iconType)}
+                                    </div>
+                                )}
+                                
+                                {/* Overlay gradient for premium feel */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            </div>
 
-                            <h4 className="font-display text-xl font-bold text-text-primary mb-2 group-hover:text-accent-primary transition-colors">
-                                {category.title}
-                            </h4>
+                            {/* Text Content below image */}
+                            <div className="p-8 flex flex-col items-center text-center">
+                                <h4 className="font-display text-2xl font-bold text-text-primary mb-3 group-hover:text-accent-primary transition-colors">
+                                    {category.title}
+                                </h4>
 
-                            <p className="font-body text-text-muted text-xs uppercase tracking-widest font-bold">
-                                {category.items}
-                            </p>
+                                <div className="w-8 h-[2px] bg-accent-primary/30 mb-4 group-hover:w-16 transition-all duration-500" />
+
+                                <p className="font-body text-text-muted text-[10px] uppercase tracking-[0.2em] font-black opacity-60">
+                                    {category.items}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>
