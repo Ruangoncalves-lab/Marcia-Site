@@ -13,6 +13,7 @@
     "@puckeditor/core": "^0.21.2",
     "@puckeditor/plugin-heading-analyzer": "^0.21.2",
     "@radix-ui/react-navigation-menu": "^1.2.14",
+    "@supabase/supabase-js": "^2.102.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",
