@@ -2,11 +2,15 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
+import { Component } from 'react'
+import type { ReactNode } from 'react'
 
 // Polyfill para crypto (necessário para o Puck v0.21+ e seus plugins em contextos não-seguros/Vite)
-if (typeof window !== 'undefined' && window.crypto) {
-  if (!window.crypto.randomUUID) {
-    window.crypto.randomUUID = function() {
+const cryptoObj = (typeof window !== 'undefined' ? window.crypto : null) as any;
+
+if (cryptoObj) {
+  if (!cryptoObj.randomUUID) {
+    cryptoObj.randomUUID = function() {
       return ([1e7] as any + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c: any) =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
       );
@@ -14,8 +18,8 @@ if (typeof window !== 'undefined' && window.crypto) {
   }
   
   // Polyfill básico para randomFillSync
-  if (!window.crypto.randomFillSync) {
-    window.crypto.randomFillSync = function(buffer: any) {
+  if (!cryptoObj.randomFillSync) {
+    cryptoObj.randomFillSync = function(buffer: any) {
       const values = crypto.getRandomValues(new Uint8Array(buffer.length));
       for (let i = 0; i < buffer.length; i++) {
         buffer[i] = values[i];
@@ -25,9 +29,7 @@ if (typeof window !== 'undefined' && window.crypto) {
   }
 }
 
-import React from 'react';
-
-class SimpleErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean, error: Error | null}> {
+class SimpleErrorBoundary extends Component<{children: ReactNode}, {hasError: boolean, error: Error | null}> {
   constructor(props: any) {
     super(props);
     this.state = { hasError: false, error: null };

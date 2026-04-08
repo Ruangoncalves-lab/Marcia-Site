@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ChevronDown, PlayCircle } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export const Spacer = ({ height }: { height: string }) => (
   <div style={{ height: height || "2rem" }} className="w-full" />
