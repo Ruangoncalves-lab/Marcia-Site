@@ -36,8 +36,8 @@ const getDB = (): Promise<IDBDatabase> => {
  * Salva os dados de uma página
  */
 export async function savePuckData(path: string, data: any): Promise<void> {
-    // 1. Tentar Supabase se estiver configurado
-    if (isSupabaseConfigured) {
+    // 1. Tentar Supabase se estiver configurado e o cliente existir
+    if (isSupabaseConfigured && supabase) {
         try {
             const { error } = await supabase
                 .from(TABLE_NAME)
@@ -74,8 +74,8 @@ export async function savePuckData(path: string, data: any): Promise<void> {
  * Carrega os dados de uma página
  */
 export async function loadPuckData(path: string): Promise<any | null> {
-    // 1. Tentar Supabase se estiver configurado
-    if (isSupabaseConfigured) {
+    // 1. Tentar Supabase se estiver configurado e o cliente existir
+    if (isSupabaseConfigured && supabase) {
         try {
             const { data, error } = await supabase
                 .from(TABLE_NAME)
@@ -113,7 +113,7 @@ export async function loadPuckData(path: string): Promise<any | null> {
  * Remove os dados de uma página
  */
 export async function deletePuckData(path: string): Promise<void> {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && supabase) {
         try {
             await supabase.from(TABLE_NAME).delete().eq('path', path);
         } catch (err) {

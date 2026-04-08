@@ -3,15 +3,19 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Verifica se as credenciais são as do exemplo ou estão vazias
+// Verifica se as credenciais são válidas
 export const isSupabaseConfigured = 
-    supabaseUrl && 
-    supabaseAnonKey && 
+    Boolean(supabaseUrl) && 
+    Boolean(supabaseAnonKey) && 
     supabaseUrl !== 'https://seu-projeto.supabase.co' &&
     supabaseAnonKey !== 'sua-chave-anon-aqui';
 
-if (!isSupabaseConfigured) {
-  console.warn("⚠️ Supabase credentials missing/default. Using local storage only.");
-}
+// Inicializa o cliente apenas se configurado corretamente
+// Caso contrário, exporta null para evitar quebras de inicialização (Runtime Error)
+export const supabase = isSupabaseConfigured 
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
+if (!isSupabaseConfigured) {
+  console.warn("⚠️ Supabase não configurado ou chaves padrão detectadas. O site funcionará apenas com armazenamento local/padrão.");
+}
